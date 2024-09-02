@@ -1,0 +1,7 @@
+.DS_Store
+venv/
+
+# Distro Packaging
+package/
+ai_agents/ai_agents
+*ai_agent.zip
