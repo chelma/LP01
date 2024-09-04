@@ -4,6 +4,32 @@ A project to learn more about generative AI
 
 ### Running the code
 
+#### Locally
+To run the code locally, use a Python virtual environment:
+
+```
+# Start in the repo root
+
+python3 -m venv venv
+source venv/bin/activate
+(cd ai_agents; pipenv sync --dev)
+
+python3 ai_agents/tools/universe_calls.py
+```
+
+#### In AWS
+The package uses Terraform to manage its cloud deployments.  You'll need valid AWS Credentials in your keyring (check using `aws sts get-caller-identity`).
+
+```
+cd ai_agents
+
+./package.sh
+
+terraform init
+terraform plan
+terraform apply
+```
+
 
 
 ### Dependencies

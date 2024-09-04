@@ -2,7 +2,6 @@ import requests
 
 EVE_REST_URL = "https://esi.evetech.net/latest/"
 
-
 def main():
     event_get_systems = {
         'function': 'get_systems',
