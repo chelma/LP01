@@ -8,4 +8,4 @@ python3 -m pip install -r requirements.txt -t ./package
 
 (cd package; zip -r9 ../ai_agents.zip .)
 
-zip -r9 ai_agents.zip tools/
+zip -r9 ai_agents.zip tools/ handlers/

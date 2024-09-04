@@ -1,5 +1,6 @@
 .DS_Store
 venv/
+*__pycache__*
 
 # Distro Packaging
 ai_agents/package/
@@ -7,5 +8,5 @@ ai_agents/ai_agents/
 *.zip
 
 # Terraform stuff
-*.tfstate
+*.tfstate*
 *.terraform*

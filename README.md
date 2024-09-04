@@ -12,9 +12,10 @@ To run the code locally, use a Python virtual environment:
 
 python3 -m venv venv
 source venv/bin/activate
-(cd ai_agents; pipenv sync --dev)
 
-python3 ai_agents/tools/universe_calls.py
+cd ai_agents
+pipenv sync --dev
+python3 -m tools.universe_calls.py
 ```
 
 #### In AWS
@@ -30,7 +31,7 @@ terraform plan
 terraform apply
 ```
 
-
+You can then run the Lambda manually in the AWS console using test events.
 
 ### Dependencies
 `pipenv` is used to managed dependencies within the project.  The `Pipefile` and `Pipefile.lock` handle the local environment.  You can add dependencies like so:

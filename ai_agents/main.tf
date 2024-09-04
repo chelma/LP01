@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_iam_role" "lambda_role" {
-  name = "lambda_role"
+  name = "universe_calls_lambda_role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -29,7 +29,7 @@ resource "aws_lambda_function" "universe_calls" {
   filename         = "ai_agents.zip"
   function_name    = "universe_calls"
   role             = aws_iam_role.lambda_role.arn
-  handler          = "tools.get_systems"
+  handler          = "handlers.universe_calls_handler"
   source_code_hash = filebase64sha256("ai_agents.zip")
   runtime          = "python3.12"
 
