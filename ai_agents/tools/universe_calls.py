@@ -32,6 +32,3 @@ def get_systems_names(system_ids: List[int]) -> List[str]:
         return [entry['name'] for entry in response.json()]
     else:
         raise HttpError(response.status_code, f"Request failed with status code: {response.status_code}")
-
-if __name__ == "__main__":
-    main()
