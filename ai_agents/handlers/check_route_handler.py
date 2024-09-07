@@ -2,7 +2,7 @@ import logging
 from typing import List
 
 from tools.esi.rest import HttpError
-from tools.generate_route import get_systems_by_terms
+from tools.check_route import check_route, AmbiguousRouteError
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)  # Set to DEBUG level to capture all messages
@@ -43,12 +43,17 @@ def lambda_handler(event: dict, context: dict) -> dict:
                     "statusCode": 400,
                     "body": "Invalid terms parameter; must exist and be a list of strings"
                 }
-            return get_systems_by_terms(terms)
+            return check_route(terms)
         else:
             return {
                 "statusCode": 400,
                 "body": "No function specified"
             }
+    except AmbiguousRouteError as e:
+        return {
+            "statusCode": 404,
+            "body": str(e)
+        }    
     except HttpError as e:
         return {
             "statusCode": e.status_code,
