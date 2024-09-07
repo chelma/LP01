@@ -2,7 +2,7 @@ from enum import Enum
 import requests
 from typing import Dict, List
 
-from tools.rest import HttpError
+from tools.esi.rest import HttpError
 
 EVE_REST_URL = "https://esi.evetech.net/latest/"
 
@@ -83,7 +83,7 @@ class GetIdsByTermHits:
         else:
             raise ValueError(f"Unknown category: {category}")
         
-    def get_hits(self, category: HitCategory) -> List[GetIdsByTermHit]:
+    def get_hits_for_category(self, category: HitCategory) -> List[GetIdsByTermHit]:
         return self.hits[category.value]
     
     def to_dict(self) -> Dict:
@@ -110,7 +110,7 @@ class GetIdsByTermsResult:
         self.search_terms = search_terms
         self.raw_result = raw_result
 
-    def get_hits(self, search_term: str) -> GetIdsByTermHits:
+    def get_hits_for_term(self, search_term: str) -> GetIdsByTermHits:
         hits = GetIdsByTermHits(search_term)
         for category, hits_list in self.raw_result.items():
             for hit in hits_list:
@@ -119,7 +119,7 @@ class GetIdsByTermsResult:
         return hits
     
     def to_dict(self) -> Dict:
-        return {search_term: self.get_hits(search_term).to_dict() for search_term in self.search_terms}
+        return {search_term: self.get_hits_for_term(search_term).to_dict() for search_term in self.search_terms}
     
     def __str__(self) -> str:
         return str(self.to_dict())
@@ -135,13 +135,6 @@ class GetIdsByTermsResult:
     
     def __hash__(self) -> int:
         return hash((self.search_terms, self.raw_result))
-
-
-
-
-
-    
-
 
 def get_ids_by_terms(search_terms: List[str]) -> GetIdsByTermsResult:
     url =  EVE_REST_URL + "universe/ids/"

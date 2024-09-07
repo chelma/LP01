@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_iam_role" "lambda_role" {
-  name = "universe_calls_lambda_role"
+  name = "check_route_lambda_role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -25,11 +25,11 @@ resource "aws_iam_role_policy_attachment" "lambda_policy" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
-resource "aws_lambda_function" "universe_calls" {
+resource "aws_lambda_function" "check_route" {
   filename         = "ai_agents.zip"
-  function_name    = "universe_calls"
+  function_name    = "check_route"
   role             = aws_iam_role.lambda_role.arn
-  handler          = "handlers.universe_calls_handler"
+  handler          = "handlers.check_route_handler"
   source_code_hash = filebase64sha256("ai_agents.zip")
   runtime          = "python3.12"
 

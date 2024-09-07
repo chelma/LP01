@@ -1,1 +1,2 @@
 from handlers.universe_calls_handler import lambda_handler as universe_calls_handler
+from handlers.check_route_handler import lambda_handler as check_route_handler

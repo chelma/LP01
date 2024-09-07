@@ -1,7 +1,7 @@
 from typing import List
 
-from tools.rest import HttpError
-from tools.universe_calls import get_ids_by_terms, get_systems, get_systems_names
+from tools.esi.rest import HttpError
+from tools.esi.universe_calls import get_ids_by_terms, get_systems, get_systems_names
 
 def main():
     event_get_systems = {

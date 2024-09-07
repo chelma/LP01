@@ -15,7 +15,7 @@ source venv/bin/activate
 
 cd ai_agents
 pipenv sync --dev
-python3 -m tools.universe_calls.py
+python3 -m handlers.check_route_handler
 ```
 
 #### In AWS
