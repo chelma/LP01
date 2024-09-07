@@ -1,7 +1,7 @@
 from typing import List
 
 from tools.rest import HttpError
-from tools.universe_calls import get_systems, get_systems_names
+from tools.universe_calls import get_ids_by_terms, get_systems, get_systems_names
 
 def main():
     event_get_systems = {
@@ -19,7 +19,17 @@ def main():
         ]
     }
 
-    results = lambda_handler(event_get_systems_names, None)
+    event_get_ids_by_terms = {
+        "function": "get_ids_by_terms",
+        "parameters": [
+            {
+                "name": "terms",
+                "value": ["Jita", "Tengu"]
+            }
+        ]
+    }
+
+    results = lambda_handler(event_get_ids_by_terms, None)
     print(results)
 
 def lambda_handler(event: dict, context: dict) -> dict:
@@ -42,6 +52,18 @@ def lambda_handler(event: dict, context: dict) -> dict:
                     "body": "Invalid system_ids parameter; must exist and be a list of integers"
                 }
             return get_systems_names(system_ids)
+        
+        elif function_name == "get_ids_by_terms":
+            terms = parameters_dict.get("terms", [])
+            is_a_list = isinstance(terms, list)
+            contains_strings = all(isinstance(x, str) for x in terms)
+
+            if not terms or is_a_list and not contains_strings:
+                return {
+                    "statusCode": 400,
+                    "body": "Invalid terms parameter; must exist and be a list of strings"
+                }
+            return get_ids_by_terms(terms).to_dict()
 
         else:
             return {
