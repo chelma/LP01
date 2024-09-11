@@ -5,15 +5,19 @@ from tools.esi.rest import HttpError
 from tools.check_route import check_route, AmbiguousRouteError
 
 logger = logging.getLogger()
-logger.setLevel(logging.DEBUG)  # Set to DEBUG level to capture all messages
+logger.setLevel(logging.DEBUG)
 
 def main():
     event_check_route = {
-        "function": "check_route",
+        "function": "checkRoute",
         "parameters": [
             {
-                "name": "system_names",
-                "value": ["Jita", "Amarr"]
+                "name": "startingSystem",
+                "value": "Jita"
+            },
+            {
+                "name": "endingSystem",
+                "value": "Mahtista"
             }
         ]
     }
@@ -33,17 +37,19 @@ def lambda_handler(event: dict, context: dict) -> dict:
     logger.debug(f"parameters_dict: {parameters_dict}")
 
     try:
-        if function_name == "check_route":
-            terms = parameters_dict.get("system_names", [])
-            is_a_list = isinstance(terms, list)
-            contains_strings = all(isinstance(x, str) for x in terms)
+        if function_name == "checkRoute":
+            startingTerm = parameters_dict.get("startingSystem", "")
+            logger.debug(f"startingTerm: {startingTerm}")
+            endingTerm = parameters_dict.get("endingSystem", "")
+            logger.debug(f"endingTerm: {endingTerm}")
+            all_terms_defined = startingTerm and endingTerm
 
-            if not terms or is_a_list and not contains_strings:
+            if not all_terms_defined:
                 return {
                     "statusCode": 400,
-                    "body": "Invalid terms parameter; must exist and be a list of strings"
+                    "body": "Invalid inputs; both the starting and ending systems must be defined"
                 }
-            return check_route(terms)
+            return check_route(startingTerm, endingTerm)
         else:
             return {
                 "statusCode": 400,

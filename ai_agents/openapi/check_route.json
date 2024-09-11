@@ -1,0 +1,62 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "CheckRoute API",
+      "description": "This API takes in the name of two EVE Online star systems and returns a route between them - if one exists. If there are any dangerous systems on the route, this will be called out.",
+      "version": "1.0.0"
+    },
+    "paths": {
+      "/checkRoute": {
+        "post": {
+          "summary": "Get route between two EVE Online star systems",
+          "description": "Returns a route between the starting and ending star systems, along with any potential warnings regarding dangerous systems.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "startingSystem": {
+                      "type": "string",
+                      "description": "The name of the starting star system."
+                    },
+                    "endingSystem": {
+                      "type": "string",
+                      "description": "The name of the ending star system."
+                    }
+                  },
+                  "required": ["startingSystem", "endingSystem"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Route successfully calculated",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Route: Jita -> Maurasi -> Itamo -> Mitsolen -> Mahtista\nWarnings: There were 5 ship kills in Itamo in the last hour."
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid input - one or more system names were not found.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Error: startingSystem 'Jta' not found."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
