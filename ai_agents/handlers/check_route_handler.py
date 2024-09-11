@@ -49,7 +49,7 @@ def lambda_handler(event: dict, context: dict) -> dict:
                     "statusCode": 400,
                     "body": "Invalid inputs; both the starting and ending systems must be defined"
                 }
-            return check_route(startingTerm, endingTerm)
+            return check_route(startingTerm, endingTerm).to_dict()
         else:
             return {
                 "statusCode": 400,

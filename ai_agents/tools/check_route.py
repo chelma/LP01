@@ -82,7 +82,7 @@ def construct_route(route_ids: List[int], get_names_result: GetNamesByIdsResult,
         route.add_entry(RouteEntry(system_id, system_name, kills, jumps))
     return route
 
-def check_route(starting_system: str, ending_system: str) -> List[Dict]:
+def check_route(starting_system: str, ending_system: str) -> Route:
     # First get the system details for the specified system names
     systems = get_systems_by_terms([starting_system, ending_system])
 
@@ -114,4 +114,4 @@ def check_route(starting_system: str, ending_system: str) -> List[Dict]:
 
     # Construct/return the route
     route = construct_route(raw_route_ids, get_names_result, raw_system_jumps, raw_system_kills)
-    return route.to_dict()
+    return route
