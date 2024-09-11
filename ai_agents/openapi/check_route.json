@@ -37,8 +37,62 @@
               "content": {
                 "application/json": {
                   "schema": {
-                    "type": "string",
-                    "example": "Route: Jita -> Maurasi -> Itamo -> Mitsolen -> Mahtista\nWarnings: There were 5 ship kills in Itamo in the last hour."
+                    "type": "array",
+                    "description": "An ordered list of systems representing the route, with details about traffic and kills in each system.",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "system_id": {
+                          "type": "integer",
+                          "description": "The unique ID of the star system."
+                        },
+                        "system_name": {
+                          "type": "string",
+                          "description": "The name of the star system."
+                        },
+                        "kills": {
+                          "type": "integer",
+                          "description": "The number of player ships destroyed in the system in the last hour."
+                        },
+                        "jumps": {
+                          "type": "integer",
+                          "description": "The number of jumps through the system in the last hour."
+                        }
+                      },
+                      "required": ["system_id", "system_name", "kills", "jumps"]
+                    },
+                    "example": [
+                      {
+                        "system_id": 30000142,
+                        "system_name": "Jita",
+                        "kills": 37,
+                        "jumps": 2073
+                      },
+                      {
+                        "system_id": 30000140,
+                        "system_name": "Maurasi",
+                        "kills": 0,
+                        "jumps": 515
+                      },
+                      {
+                        "system_id": 30000119,
+                        "system_name": "Itamo",
+                        "kills": 1,
+                        "jumps": 419
+                      },
+                      {
+                        "system_id": 30000120,
+                        "system_name": "Mitsolen",
+                        "kills": 8,
+                        "jumps": 88
+                      },
+                      {
+                        "system_id": 30000122,
+                        "system_name": "Mahtista",
+                        "kills": 0,
+                        "jumps": 16
+                      }
+                    ]
                   }
                 }
               }

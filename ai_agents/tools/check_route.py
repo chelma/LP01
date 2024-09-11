@@ -78,6 +78,7 @@ def construct_route(route_ids: List[int], get_names_result: GetNamesByIdsResult,
                 jumps = system["ship_jumps"]
                 break
         system_name = get_names_result.get_hit_for_id(system_id).name
+        logger.info(f"Adding route entry for {system_name} / {system_id} with {kills} kills and {jumps} jumps")
         route.add_entry(RouteEntry(system_id, system_name, kills, jumps))
     return route
 
