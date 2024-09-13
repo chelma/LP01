@@ -1,15 +1,15 @@
 {
     "openapi": "3.0.0",
     "info": {
-      "title": "CheckRoute API",
-      "description": "This API takes in the name of two EVE Online star systems and returns a route between them - if one exists. If there are any dangerous systems on the route, this will be called out.",
+      "title": "ESI APIs",
+      "description": "These APIs operate on data from the EVE Online ESI API.",
       "version": "1.0.0"
     },
     "paths": {
       "/checkRoute": {
         "post": {
           "summary": "Get route between two EVE Online star systems",
-          "description": "Returns a route between the starting and ending star systems, along with any potential warnings regarding dangerous systems.",
+          "description": "Returns a route between the starting and ending star systems, along with data useful for determining the danger level.",
           "requestBody": {
             "required": true,
             "content": {
