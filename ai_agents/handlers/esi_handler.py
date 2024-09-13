@@ -84,8 +84,6 @@ def lambda_handler(event: dict, context: dict) -> dict:
             }
         },
     }
-
-
     logger.debug(f"Response: {response}")
 
     return response

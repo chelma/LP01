@@ -20,7 +20,7 @@ class AmbiguousRouteError(Exception):
 
 
 class RouteEntry:
-    def __init__(self, id: int, system_name: str, kills: int = None, jumps: int = None):
+    def __init__(self, id: int, system_name: str, kills: int = 0, jumps: int = 0):
         self.system_id = id
         self.system_name = system_name
         self.kills = kills
@@ -64,7 +64,7 @@ def get_systems_by_terms(search_terms: List[str]) -> Dict[str, List[TermSearchHi
     return systems
 
 def construct_route(route_ids: List[int], get_names_result: GetNamesByIdsResult, raw_system_jumps: List[Dict], raw_system_kills: List[Dict]) -> Route:
-    route = Route()
+    route = Route(entries=[])
 
     for system_id in route_ids:
         kills = None
