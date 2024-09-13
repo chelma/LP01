@@ -10,6 +10,7 @@
         "post": {
           "summary": "Get route between two EVE Online star systems",
           "description": "Returns a route between the starting and ending star systems, along with data useful for determining the danger level.",
+          "operationId": "checkRoute",
           "requestBody": {
             "required": true,
             "content": {
