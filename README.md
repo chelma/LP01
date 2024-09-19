@@ -1,6 +1,7 @@
 # LP01
 A project to learn more about generative AI
 
+This particular project demonstrates the ability to define and deploy an Amazon Bedrock Agent that can use a single Lambda Function as a Tool to check the danger-level of routes between starsystems in the MMORPG EVE Online's in-game universe.  To answer these questions, the Tool uses the EVE Swagger Interface (ESI) for REST calls against the game universe.  You can either invoke the Lambda directly by running the code locally (as explained below), or you can deploy using Terraform and chat with the Agent in the AWS Console (also explained below).
 
 ### Running the code
 
